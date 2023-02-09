@@ -18,6 +18,7 @@ If will delete:
 - File (1).txt
 - File (2).txt
 - File.txt  
+
 And renames "File (3).txt" to "File.txt".   
 
 The highest number in brackets is assumed to be the newest file.      
