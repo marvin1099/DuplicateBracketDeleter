@@ -7,7 +7,7 @@ Download and Install:
 - Python 
 
 ## Downloads
-Downloads / Releases are Here:  
+Downloads / Releases are here:  
 https://codeberg.org/marvin1099/Bracket-Number-Deleter/releases
  
 ## Use
@@ -22,15 +22,17 @@ Then open the terminal / the console and run:
 ```
 PATH/TO/delete-duplicates.py
 ```
-To run delete the run the command listed in the action file.
+To run the run the commands listed in the action file.
+The action file will do what the explanation says by default.
+But you can change what it will do quite easily.
+Just read the file it has all the needed info.
 
 ## Explanation
-To Beter Explain,  
-if there is a:
+To better explain the default, let's consider:
 - File (1).txt
 - File (2).txt
 - File (3).txt
 - File.txt
 
-If will delete the oldest 3 files,  
+Then it will delete the oldest 3 files,  
 keep the newest and rename it to File.txt
