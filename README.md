@@ -12,10 +12,10 @@ Downloads / Releases are here:
 https://codeberg.org/marvin1099/Bracket-Number-Deleter/releases
  
 ## Use
-Keep in mind `delete-duplicates.py` will be the name of the file downloaded.
-This name is different if you use the copiled version.
-Its `delete-duplicates-windows.exe` for windows
-and `delete-duplicates-linux` for linux.
+Keep in mind `delete-duplicates.py` will be the name of the file downloaded.  
+This name is different if you use the copiled version.  
+Its `delete-duplicates-windows.exe` for windows  
+and `delete-duplicates-linux` for linux.  
 Open the terminal / the console and run:
 ```
 PATH/TO/delete-duplicates.py PATH/OF/DUPLICATES
