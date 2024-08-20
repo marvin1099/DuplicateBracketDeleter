@@ -5,12 +5,17 @@ If yes this deletes and moves files to get rid of the brackets and parentheses.
 ## Dependencys
 Download and Install:
 - Python 
+This is not needed if you use the compiled version
 
 ## Downloads
 Downloads / Releases are here:  
 https://codeberg.org/marvin1099/Bracket-Number-Deleter/releases
  
 ## Use
+Keep in mind `delete-duplicates.py` will be the name of the file downloaded.
+This name is different if you use the copiled version.
+Its `delete-duplicates-windows.exe` for windows
+and `delete-duplicates-linux` for linux.
 Open the terminal / the console and run:
 ```
 PATH/TO/delete-duplicates.py PATH/OF/DUPLICATES
