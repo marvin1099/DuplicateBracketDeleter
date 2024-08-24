@@ -5,6 +5,7 @@ If yes this deletes and moves files to get rid of the brackets and parentheses.
 ## Dependencys
 Download and Install:
 - Python 
+
 This is not needed if you use the compiled version
 
 ## Downloads
