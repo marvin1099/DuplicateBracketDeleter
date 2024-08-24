@@ -114,6 +114,24 @@ def normalize_and_rename_file(file_path):
     print(f"Renamed: {file_path} -> {new_paths[0]}")
 
 
+def select_folder():
+    import tkinter as tk
+    from tkinter import filedialog
+    # Create a Tk root widget, which is necessary to use filedialog.
+    root = tk.Tk()
+    root.withdraw()  # Hide the root window
+
+    # Open the folder selection dialog and return the selected folder path.
+    folder_path = False
+    while folder_path == False or (folder_path and not os.path.isdir(folder_path)):
+        folder_path = filedialog.askdirectory()
+        if not folder_path:
+            folder_path = None
+
+    if folder_path:
+        print(f"Selected folder '{folder_path}'")
+    return folder_path
+
 def execute_config_file():
     if os.path.exists(CONFIG_FILE):
         print(f"Executing tasks from '{CONFIG_FILE}'")
@@ -135,11 +153,30 @@ def execute_config_file():
                     print(f"Unknown command: {command}")
         os.remove(CONFIG_FILE)
     else:
-        print(f"No action file found at '{CONFIG_FILE}'\nUse the target folder as argument to the script to generate the action file")
+        return f"No action file found at '{CONFIG_FILE}'\nYou can use the target folder as argument, to the script to generate the action file, if tk is missing or for automation"
+    return None
 
-def main(folder=None):
+def main(folder, purecli):
+    returnmessage = None
     if not folder:
-        execute_config_file()
+        returnmessage = execute_config_file()
+
+
+    if purecli == False and not folder and returnmessage:
+        try:
+            folder = select_folder()
+        except Exception as e:
+            print("Tk not avalible, can't display a folder selection.")
+            folder = None
+        else:
+            if not folder:
+                print("Folder selcetion was not valid")
+    elif purecli == True:
+        print("CLI mode used, not displaying any tk windows")
+
+    if not folder:
+        if returnmessage:
+            print(returnmessage)
     else:
         if not os.path.isdir(folder):
             print(f"The folder '{folder}' is not a directory.")
@@ -149,5 +186,13 @@ def main(folder=None):
         add_actions_to_config(similar_files, folder)
 
 if __name__ == "__main__":
-    folder = sys.argv[1] if len(sys.argv) == 2 else None
-    main(folder)
+    folder = None
+    purecli = False
+    for i in sys.argv[1:]:
+        if i.find(os.sep) == -1 and "cli" in i:
+            purecli = True
+        elif os.path.isdir(i):
+            folder = i
+    if folder:
+        print(f"Found following folder in cli '{folder}'")
+    main(folder, purecli)
