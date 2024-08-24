@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import subprocess
+import time
 import sys
 import os
 import re
@@ -180,6 +181,7 @@ def main(folder, purecli):
     else:
         if not os.path.isdir(folder):
             print(f"The folder '{folder}' is not a directory.")
+            time.sleep(2)
             sys.exit(1)
 
         similar_files = find_similar_files(folder)
@@ -196,3 +198,4 @@ if __name__ == "__main__":
     if folder:
         print(f"Found following folder in cli '{folder}'")
     main(folder, purecli)
+    time.sleep(2)
