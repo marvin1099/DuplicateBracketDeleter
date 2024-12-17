@@ -6,7 +6,11 @@ import sys
 import os
 import re
 
-CONFIG_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),"cleanup-actions.txt")
+if getattr(sys, 'frozen', False):  # Check if running as a compiled executable
+    script_path = os.path.abspath(sys.executable)
+else:  # Running as a regular Python script
+    script_path = os.path.abspath(__file__)
+CONFIG_FILE = os.path.join(os.path.dirname(script_path),"cleanup-actions.txt")
 
 def find_similar_files(folder):
     files = os.listdir(folder)
@@ -116,16 +120,27 @@ def normalize_and_rename_file(file_path):
 
 
 def select_folder():
-    import tkinter as tk
-    from tkinter import filedialog
-    # Create a Tk root widget, which is necessary to use filedialog.
-    root = tk.Tk()
-    root.withdraw()  # Hide the root window
+    try:
+        import tkinter as tk
+        from tkinter import filedialog
+        gui_selector = True
+    except Exception as e:
+        gui_selector = False
+
+    if gui_selector:
+        # Create a Tk root widget, which is necessary to use filedialog.
+        root = tk.Tk()
+        root.withdraw()  # Hide the root window
+
+    print("Select / Input the target directory\nThis directory is relative to the working directory unless a absolute path is given")
 
     # Open the folder selection dialog and return the selected folder path.
     folder_path = False
     while folder_path == False or (folder_path and not os.path.isdir(folder_path)):
-        folder_path = filedialog.askdirectory()
+        if gui_selector:
+            folder_path = filedialog.askdirectory()
+        else:
+            folder_path = input("Folder path: ")
         if not folder_path:
             folder_path = None
 
@@ -154,7 +169,7 @@ def execute_config_file():
                     print(f"Unknown command: {command}")
         os.remove(CONFIG_FILE)
     else:
-        return f"No action file found at '{CONFIG_FILE}'\nYou can use the target folder as argument, to the script to generate the action file, if tk is missing or for automation"
+        return f"No action file found at '{CONFIG_FILE}'\nYou can use the target folder as argument to the script to generate the action file for automation"
     return None
 
 def main(folder, purecli):
