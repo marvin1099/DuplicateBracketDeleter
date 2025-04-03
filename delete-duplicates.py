@@ -282,7 +282,7 @@ def main():
         print("-s\tUse for simulating the cleanup actions (print actions only).")
         print("-d\tUse so renaming will only be done if there are duplicates avalible.")
         print("-k\tUse to keep the config file after running the actions.")
-        print("Any path added as any argument will be prossed.")
+        print("Any paths added as any argument will be prossed.")
         if helpme:
             exit()
 
